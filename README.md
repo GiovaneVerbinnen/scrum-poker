@@ -4,8 +4,10 @@
 This is a Livewire project - TALL STACK(TailwindCSS Alpine Laravel Livewire)
 </p>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="./resources/room-page.png" width="100%"></a></p>
-For running localy you need:
-=
+
+___
+
+### For running localy you need:
 
 ```
    composer install
