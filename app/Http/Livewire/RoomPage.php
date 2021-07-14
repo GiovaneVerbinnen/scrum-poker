@@ -49,6 +49,11 @@ class RoomPage extends Component
         return view('livewire.room-page')->layout('layouts.dark');
     }
 
+    public function verifySelectedFeature()
+    {
+        $this->selectedFeatureId = $this->room->selected_feature_id;
+    }
+
     public function getFeatureListProperty()
     {
         return $this->room->features()

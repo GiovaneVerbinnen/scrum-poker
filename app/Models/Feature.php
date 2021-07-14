@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int $id
  * @property-read string $name
  * @property-read int $room_id
- * @property-read Carbon $revealed_at
  * @property-read Carbon $completed_at
- * @package App\models
+ * @property-read Carbon $revealed_at
+ * @property-read Room $room
+ * @package App\Models
  */
 
 class Feature extends Model
@@ -21,6 +22,8 @@ class Feature extends Model
 
     protected $fillable = [
         'name',
+        'revealed_at',
+        'completed_at',
     ];
 
     public function room()
@@ -32,10 +35,12 @@ class Feature extends Model
     {
         $query->whereNotNull('compleated_at');
     }
+
     public function scopeUncompleted(Builder $query)
     {
         $query->whereNull('compleated_at');
     }
+
     public function complete()
     {
         $this->forceFill([
@@ -54,8 +59,14 @@ class Feature extends Model
     {
         return !! $this->compleated_at;
     }
+
     public function isRevealed()
     {
         return !! $this->revealed_at;
+    }
+
+    public function toggleComplete()
+    {
+        $this->isCompleted() ? $this->uncomplete() : $this->complete();
     }
 }

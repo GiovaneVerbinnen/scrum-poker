@@ -4,17 +4,19 @@
             Voting Feature
         </h2>
 
-        <div>
-            <x-button.red class="p-2">
-                <x-icon.trash class="w-5 h-5"></x-icon.trash>
-            </x-button.red>
-            <x-button.primary class="p-2">
-                <x-icon.eye class="w-5 h-5"></x-icon.eye>
-        </x-button.primary>
-            <x-button.green class="p-2">
-                <x-icon.check class="w-5 h-5"></x-icon.check>
-            </x-button.green>
-        </div>
+        @if(isManager())
+            <div>
+                <x-button.red wire:click="remove"  class="p-2">
+                    <x-icon.trash class="w-5 h-5"></x-icon.trash>
+                </x-button.red>
+                <x-button.primary class="p-2">
+                    <x-icon.eye class="w-5 h-5"></x-icon.eye>
+                </x-button.primary>
+                <x-button.green wire:click="toggleComplete" class="p-2">
+                    {{ $feature->isCompleted() ? 'Uncomplete' : 'Complete'  }}
+                </x-button.green>
+            </div>
+        @endif
     </div>
     <h1 class="text-4xl mb-10">{{ $feature->name }}</h1>
 

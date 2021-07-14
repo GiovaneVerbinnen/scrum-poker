@@ -13,7 +13,8 @@ class AddSelectedFeatureIdToRoomsTable extends Migration
             $table->foreignId('selected_feature_id')
             ->nullable()
             ->references('id')
-            ->on('features');
+            ->on('features')
+            ->onDelete('set null');
         });
     }
 

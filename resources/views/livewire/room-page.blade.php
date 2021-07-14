@@ -1,4 +1,5 @@
-<div wire:poll class="max-w-6xl  px-8  mx-auto">
+<div wire:poll="verifySelectedFeature" class="max-w-6xl  px-8  mx-auto">
+    {{-- Header --}}
     <div class="pt-16 flex items-center justify-between">
         <div>
             {{-- @dump(isManager($room)) --}}
@@ -15,8 +16,8 @@
                 </x-icon>
         </x-button>
     </div>
-
-    <div class="grid grid-cols-12 gap-10 mt-32">
+    {{-- Corpo --}}
+    <div class="grid grid-cols-12 gap-10 mt-16">
         <div class="col-span-4 space-y-3">
             <div>
                 @if(isManager())
