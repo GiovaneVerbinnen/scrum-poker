@@ -12,12 +12,7 @@ class VotingFeature extends Component
     public Feature $feature;
 
     public $ratings = [
-        '?',1,2,3,5,8,10,13,21,40,100
-    ];
-
-    public $participants = [
-        ['name'=> 'Giovane'],
-        ['name'=>'John'],
+        '?', 1, 2, 3, 5, 8, 10, 13, 21, 40, 100
     ];
 
     public function mount($selectedFeatureId)

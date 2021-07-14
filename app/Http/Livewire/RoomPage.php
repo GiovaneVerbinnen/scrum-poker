@@ -37,7 +37,7 @@ class RoomPage extends Component
         'selectedFeatureId' => ['except' => ''],
     ];
 
-    public function mount(? Room $room)
+    public function mount(?Room $room)
     {
         $this->room = $room->exists
             ? $room
@@ -53,8 +53,8 @@ class RoomPage extends Component
     {
         return $this->room->features()
             ->latest()
-            ->when( !$this->showCompleted, fn ($query) =>
-                $query->whereNull('compleated_at'))
+            ->when(!$this->showCompleted, fn ($query) =>
+            $query->whereNull('compleated_at'))
             ->get();
     }
 
@@ -69,15 +69,15 @@ class RoomPage extends Component
         $this->room->features()->create([
             'name' => $this->newFeature
         ]);
-        $this->newFeature = null ;
+        $this->newFeature = null;
     }
 
     public function setSelectedFeature($feature)
     {
-       $this->selectedFeatureId = $feature;
-       $this->room->forceFill([
-           'select_feature_id' => $feature,
-           ])->save();
+        $this->selectedFeatureId = $feature;
+        $this->room->forceFill([
+            'selected_feature_id' => $feature,
+        ])->save();
     }
 
     private function getRoom(): Room
@@ -86,7 +86,7 @@ class RoomPage extends Component
         /** @var Room $room */
         $room = Room::find($roomId) ?? Room::create();
         Session::put('roomId', $room->id);
-        if($room->wasRecentlyCreated) {
+        if ($room->wasRecentlyCreated) {
             // $managerToken =  Str::random(32);
             Session::put('isManager', true);
         }
