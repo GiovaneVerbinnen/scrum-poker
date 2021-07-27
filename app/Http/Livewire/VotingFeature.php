@@ -12,6 +12,8 @@ class VotingFeature extends Component
 
     public ?Feature $feature;
 
+    public $voted;
+
 
     public $ratings = [
         '?', 1, 2, 3, 5, 8, 10, 13, 21, 40, 100
@@ -52,5 +54,11 @@ class VotingFeature extends Component
     {
         $this->feature->toggleComplete();
         $this->emit('featureUpdated' . $this->feature->id);
+    }
+
+    public function vote($rating)
+    {
+        $this->voted = $rating;
+        participant()->vote($rating);
     }
 }

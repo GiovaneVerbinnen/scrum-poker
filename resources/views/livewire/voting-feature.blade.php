@@ -35,10 +35,11 @@
 
     <h3 class="text-2xl opacity-50 mt-10 mb-3">Cards:</h3>
     <div class="mx-3">
+        {{ $voted }}
         <div class="flex flex-wrap">
             @foreach ($ratings as $rating)
             {{-- Card --}}
-            <x-voting-card :rating="$rating" />
+            <x-voting-card :rating="$rating" :selected="$rating == $voted" wire:click="vote('{{ $rating }}')" />
             @endforeach
         </div>
     </div>

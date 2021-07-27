@@ -1,6 +1,6 @@
-<div wire:poll="verifySelectedFeature" class="max-w-6xl  px-8  mx-auto">
+<div wire:poll="verifySelectedFeature" class="max-w-6xl  px-8  mx-auto divide-y-2 divide-gray-700">
     {{-- Header --}}
-    <div class="pt-16 flex items-center justify-between">
+    <div class="py-8 flex items-center justify-between ">
         <div>
             {{-- @dump(isManager($room)) --}}
             <h1 class="text-4xl font-bold text-pink-500">Scrum Poker</h1>
@@ -21,7 +21,7 @@
         </x-button>
     </div>
     {{-- Corpo --}}
-    <div class="grid grid-cols-12 gap-10 mt-16">
+    <div class="grid grid-cols-12 gap-10 pt-8">
         <div class="col-span-4 space-y-3">
             <div>
                 @if(isManager())
