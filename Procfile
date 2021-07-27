@@ -1,1 +1,1 @@
-web: vendor/bin/scrum-poker public/
+web: ./ public/
