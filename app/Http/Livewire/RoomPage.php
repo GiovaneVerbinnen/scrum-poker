@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Feature;
+use App\Models\Participant;
 use App\Models\Room;
 use Illuminate\Support\Facades\Session;
 use Laravel\Fortify\Features;
@@ -21,7 +22,9 @@ class RoomPage extends Component
     public $newFeature;
     public $showCompleted = false;
     public $selectedFeatureId;
-    public bool $isParticipant = false;
+    public ?Participant $participant;
+    public ?Feature $feature;
+
 
     protected $rules = [
         'newFeature' => 'required|string|max:512',
@@ -48,6 +51,8 @@ class RoomPage extends Component
     {
         return view('livewire.room-page')->layout('layouts.dark');
     }
+
+
 
     public function verifySelectedFeature()
     {
