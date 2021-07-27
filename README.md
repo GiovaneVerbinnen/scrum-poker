@@ -5,16 +5,21 @@ This is a Livewire project - TALL STACK(TailwindCSS Alpine Laravel Livewire)
 </p>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="./resources/room-page.png" width="100%"></a></p>
 
-___
+---
 
 ### For running localy you need:
+
+I recomment using Valet if you have Linux or Mac, in case of Windows use Laragon/XAMPP.
+
+Database is PostgreSQL.
 
 ```
    composer install
    npm install
    config de .env file and create a database for the project
    php artisan migrate
-   php artisan serve
+
+   php artisan serve(optional)
 ```
 
 ### About Laravel

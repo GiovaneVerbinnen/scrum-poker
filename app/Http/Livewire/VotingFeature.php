@@ -59,6 +59,6 @@ class VotingFeature extends Component
     public function vote($rating)
     {
         $this->voted = $rating;
-        participant()->vote($rating);
+        participant()->vote($this->feature, $rating);
     }
 }
