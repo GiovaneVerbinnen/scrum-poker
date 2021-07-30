@@ -16,7 +16,7 @@ Database is PostgreSQL.
 ```
    composer install
    npm install
-   config de .env file and create a database for the project
+   config the .env file according the .env.example and create a database for the project
    php artisan migrate
 
    php artisan serve(optional)
