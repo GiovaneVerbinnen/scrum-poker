@@ -49,5 +49,14 @@ class Participant extends Model
             ]
         );
         $estimatePoint->update(compact('value'));
+
+        return $estimatePoint;
+    }
+
+    public function getEstimatePoints(Feature $feature): ?EstimatePoint
+    {
+        return $this->estimatePoints()
+            ->whereFeatureId($feature->id)
+            ->first();
     }
 }

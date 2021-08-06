@@ -1,4 +1,4 @@
-@props(['rating', 'name' => null,'participant'=> null, 'selected' => false, ])
+@props(['rating', 'name' => null,'participant'=> null, 'selected' => false, 'feature' => false, ])
 
 <div x-data {{ $attributes }}
     class="mx-3 group select-none cursor-pointer relative mb-3 col-span-1 transition {{ $selected ? 'opacity-100 transform scale-110' : 'opacity-50 hover:opacity-75' }}"

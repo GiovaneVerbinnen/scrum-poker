@@ -4,7 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Feature;
 use App\Models\Participant;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+
+/**
+ * @property-read Collection $participants
+ * @package
+ */
 
 class VotingFeature extends Component
 {
@@ -13,6 +19,8 @@ class VotingFeature extends Component
     public ?Feature $feature;
 
     public $voted;
+
+    public $reactive;
 
 
     public $ratings = [
@@ -23,6 +31,7 @@ class VotingFeature extends Component
     public function mount($selectedFeatureId)
     {
         $this->feature = Feature::find($selectedFeatureId);
+        $this->voted = $this->getEstimatePointValue($this->feature);
     }
 
     public function render()
@@ -33,9 +42,14 @@ class VotingFeature extends Component
     public function getParticipantsProperty()
     {
         if (!$this->feature) {
-            return ['name' => 'Sem participantes'];
+            return [];
         }
-        return $this->feature->room->participants;
+        return $this->feature->room->fresh()->participants()
+            ->with([
+                'estimatePoints' => fn ($estimatePoint)
+                => $estimatePoint->whereFeatureId($this->feature->id ?? null)
+            ])
+            ->get();
     }
 
     public function remove()
@@ -59,6 +73,26 @@ class VotingFeature extends Component
     public function vote($rating)
     {
         $this->voted = $rating;
-        participant()->vote($this->feature, $rating);
+        $estimatePoint = participant()->vote($this->feature, $rating);
+    }
+    public function hasVoted(Participant $participant)
+    {
+        return $participant->getEstimatePoints($this->feature)->value ?? false;
+    }
+
+    public function verifyParticipants()
+    {
+        $this->reactive = $this->participants->sum(fn ($p) => $p->estimatePoints->sum('value'));
+    }
+
+    private function getEstimatePointValue(?Feature $feature)
+    {
+        if (!$feature || !participant()) {
+            return null;
+        }
+
+        return participant()->estimatePoints()
+            ->whereFeatureId($feature->id)
+            ->firstOrNew()->value ?? null;
     }
 }
