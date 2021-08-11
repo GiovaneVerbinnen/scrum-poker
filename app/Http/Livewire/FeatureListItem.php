@@ -32,11 +32,11 @@ class FeatureListItem extends Component
     public function toggleComplete()
     {
         $this->feature->toggleComplete();
+        $this->emitUp('featureUpdated');
     }
 
-   public function isSelectedFeature()
-   {
-       return $this->feature->id === $this->selectedFeatureId;
-   }
-
+    public function isSelectedFeature()
+    {
+        return $this->feature->id === $this->selectedFeatureId;
+    }
 }

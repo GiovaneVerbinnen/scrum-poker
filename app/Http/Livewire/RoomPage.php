@@ -18,12 +18,12 @@ use Livewire\Component;
 class RoomPage extends Component
 {
 
+    public ?Participant $participant;
+    public ?Feature $feature;
     public Room $room;
     public $newFeature;
     public $showCompleted = false;
     public $selectedFeatureId;
-    public ?Participant $participant;
-    public ?Feature $feature;
 
 
     protected $rules = [
@@ -54,10 +54,10 @@ class RoomPage extends Component
 
 
 
-    public function verifySelectedFeature()
-    {
-        $this->selectedFeatureId = $this->room->selected_feature_id;
-    }
+    // public function verifySelectedFeature()
+    // {
+    //     $this->selectedFeatureId = $this->room->selected_feature_id;
+    // }
 
     public function getFeatureListProperty()
     {
@@ -82,12 +82,12 @@ class RoomPage extends Component
         $this->newFeature = null;
     }
 
-    public function setSelectedFeature($feature)
+    public function setSelectedFeature(Feature $feature)
     {
-        $this->selectedFeatureId = $feature;
-        $this->room->forceFill([
-            'selected_feature_id' => $feature,
-        ])->save();
+        //$this->selectedFeatureId = $feature;
+        $this->room->update([
+            'selected_feature_id' => $feature->id ?? null,
+        ]);
     }
 
     private function getRoom(): Room

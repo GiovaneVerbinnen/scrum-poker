@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Support;
 use App\Models\Feature;
 use App\Models\Participant;
 use Illuminate\Database\Eloquent\Collection;
@@ -73,16 +74,21 @@ class VotingFeature extends Component
     public function vote($rating)
     {
         $this->voted = $rating;
-        $estimatePoint = participant()->vote($this->feature, $rating);
+        if (isManager()) {
+        } else {
+            $estimatePoint = participant()->vote($this->feature, $rating);
+        }
     }
-    public function hasVoted(Participant $participant)
+    public function voteValue(Participant $participant)
     {
         return $participant->getEstimatePoints($this->feature)->value ?? false;
     }
 
     public function verifyParticipants()
     {
-        $this->reactive = $this->participants->sum(fn ($p) => $p->estimatePoints->sum('value'));
+        $this->reactive = $this->participants
+            ->map(fn (Participant $p) => $p->estimatePoints->map->value->join(':'))
+            ->join('');
     }
 
     private function getEstimatePointValue(?Feature $feature)
@@ -94,5 +100,12 @@ class VotingFeature extends Component
         return participant()->estimatePoints()
             ->whereFeatureId($feature->id)
             ->firstOrNew()->value ?? null;
+    }
+
+    public function reveal()
+    {
+        $this->feature->update([
+            'revealed_at' => now(),
+        ]);
     }
 }

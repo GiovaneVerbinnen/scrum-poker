@@ -1,4 +1,4 @@
-<div wire:poll="verifySelectedFeature" class="max-w-6xl  px-8  mx-auto divide-y-2 divide-gray-700">
+<div wire:poll class="max-w-6xl  px-8  mx-auto divide-y-2 divide-gray-700">
     {{-- Header --}}
     <div class="py-8 flex items-center justify-between ">
         <div>
@@ -43,16 +43,17 @@
                 <x-jet-input-error for="newFeature"></x-jet-input-error>
 
                 @foreach ($this->getFeatureListProperty() as $key => $feature)
-                <livewire:feature-list-item :feature="$feature" :selectedFeatureId="$selectedFeatureId"
-                    :key='"room-{$room->id}-{$feature->id}-" . $selectedFeatureId ?? null . $room->participants()->count()' />
+                <livewire:feature-list-item :feature="$feature" :selectedFeatureId="$room->selected_feature_id"
+                    :key='"room-{$room->id}-{$feature->id}-" . $room->selected_feature_id ?? null . $room->participants()->count()' />
                 @endforeach
             </div>
 
         </div>
         <div class="col-span-8">
-            @if($selectedFeatureId)
-            <livewire:voting-feature :key="$selectedFeatureId . $room->participants()->count()"
-                :selectedFeatureId="$selectedFeatureId" />
+
+            @if($room->selected_feature_id)
+            <livewire:voting-feature :key="$room->selected_feature_id . $room->participants()->count()"
+                :selectedFeatureId="$room->selected_feature_id" />
             @endif
         </div>
     </div>

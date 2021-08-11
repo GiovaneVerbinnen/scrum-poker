@@ -7,14 +7,8 @@
 
         @if(isManager())
         <div class="flex items-center justify-between gap-2">
-            <x-button.red wire:click="remove" class="p-2">
-                <p>Delete</p>
-
-            </x-button.red>
-            <x-button.primary class="p-2">
-
-                <p>Visibility</p>
-            </x-button.primary>
+            <x-button.red wire:click="remove" class="p-2">Delete</x-button.red>
+            <x-button.primary class="p-2" wire:click="reveal">Reveal</x-button.primary>
             <x-button.green wire:click="toggleComplete" class="p-2">
                 {{ $feature->isCompleted() ? 'Uncomplete' : 'Complete'  }}
             </x-button.green>
@@ -28,15 +22,15 @@
     <div class="mx-3 mt-10 mb-3">
         <div class="flex flex-wrap">
             @foreach ($this->participants as $participant )
-            <x-voting-card rating="?" :participant="$participant" :selected="$this->hasVoted($participant)"
-                :name="$participant['name']" @remove-participant="$wire.removeParticipant($event.detail)" />
+            <x-voting-card :rating="$feature->isRevealed() ? $this->voteValue($participant) : ''"
+                :participant="$participant" :selected="$this->voteValue($participant)" :name="$participant['name']"
+                @remove-participant="$wire.removeParticipant($event.detail)" />
             @endforeach
         </div>
     </div>
 
     <h3 class="text-2xl opacity-50 mt-10 mb-3">Cards:</h3>
     <div class="mx-3">
-        {{ $voted }}
         <div class="flex flex-wrap">
             @foreach ($ratings as $rating)
             {{-- Card --}}
