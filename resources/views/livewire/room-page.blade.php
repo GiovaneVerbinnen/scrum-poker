@@ -1,6 +1,6 @@
-<div wire:poll class="max-w-6xl  px-8  mx-auto divide-y-2 divide-gray-700">
+<div wire:poll class="max-w-6xl px-8  mx-auto divide-y-2 divide-gray-700">
     {{-- Header --}}
-    <div class="py-8 flex items-center justify-between ">
+    <div class="grid gap-4 sm:flex items-center sm:justify-between pt-8">
         <div>
             {{-- @dump(isManager($room)) --}}
             <h1 class="text-4xl font-bold text-pink-500">Scrum Poker</h1>
@@ -10,18 +10,20 @@
             <h3 class="text-md opacity-80"> Welcome, {{participant()->name}} !</h3>
             @endif
         </div>
-        <p class="bg-gradient-to-b from-pink-500 to-pink-600 space-x-2 px-3 py-1 rounded-lg text-lg">
+        <p class="text-center bg-gradient-to-b from-pink-500 to-pink-600 space-x-2 px-3 py-1 rounded-lg text-lg">
             Room ID: {{$this->room->id}}
         </p>
+
         <x-button
-            class="bg-blue-400 flex items-center space-x-2 px-3 py-1 rounded-lg text-white hover:bg-blue-500 focus:outline-none ">
-            <span class="text-xl">Share</span>
-            <x-icon.share class="w-5 h-5">
+            class="text-center text-xl flex  bg-blue-400  space-x-2 px-3 py-1 rounded-lg text-white hover:bg-blue-500 focus:outline-none  xs:w-full justify-center">
+            Share
+            <x-icon.share class="w-5 h-5 mt-1 ml-1">
                 </x-icon>
         </x-button>
+
     </div>
     {{-- Corpo --}}
-    <div class="grid grid-cols-12 gap-10 pt-8">
+    <div class="md:grid grid-cols-12 gap-10 pt-8">
         <div class="col-span-4 space-y-3">
             <div>
                 @if(isManager())
