@@ -3,8 +3,9 @@
     <div class="grid gap-4 sm:flex items-center sm:justify-between pt-8">
         <div>
             {{-- @dump(isManager($room)) --}}
-            <h1 class="text-4xl font-bold text-pink-500">Scrum Poker</h1>
-            @if(isManager())
+            <a href="{{ route('dashboard') }}">
+                <h1 class="text-4xl font-bold text-pink-500">Scrum Poker</h1>
+            </a> @if(isManager())
             <h3 class="text-md opacity-80">You are the manager</h3>
             @else
             <h3 class="text-md opacity-80"> Welcome, {{participant()->name}} !</h3>
