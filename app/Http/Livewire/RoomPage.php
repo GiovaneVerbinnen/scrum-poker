@@ -27,7 +27,7 @@ class RoomPage extends Component
 
 
     protected $rules = [
-        'newFeature' => 'required|string|max:512',
+        'newFeature' => 'required|string|max:128',
     ];
 
     protected $listeners = [

@@ -16,7 +16,7 @@ class CreateFeaturesTable extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 512);
+            $table->string('name', 128);
             $table->dateTime('compleated_at')->nullable();
             $table->dateTime('revealed_at')->nullable();
             $table->foreignIdFor(Room::class)->references('id')->on('rooms')->onDelete('cascade');
