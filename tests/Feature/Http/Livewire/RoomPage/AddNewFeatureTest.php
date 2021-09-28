@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Livewire\RoomPage;
+namespace Tests\Feature\Http\Livewire;
 
 use Tests\TestCase;
 use Livewire\Livewire;
@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 use App\Http\Livewire\RoomPage;
 use Illuminate\Support\Facades\Session;
 
-class AddNewFeatureTest extends TestCase
+class FeatureListItem extends TestCase
 {
     /** @test */
     public function sees_you_are_the_manager()
