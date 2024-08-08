@@ -22,6 +22,22 @@ Database is PostgreSQL.
    php artisan serve(optional)
 ```
 
+### From Running in Docker
+Copy the .env.example to .env
+
+```bash
+   docker-compose up -d
+   docker-compose exec pg-app bash
+   psql
+   create database scrum_poker;
+   exit
+   exit
+   docker-compose exec laravel-app bash
+   php artisan migrate
+   php artisan key:generate
+```
+Now you can hit the localhost:8080
+
 ### About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
